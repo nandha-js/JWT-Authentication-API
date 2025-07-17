@@ -1,76 +1,102 @@
 # JWT Authentication API
 
-A Node.js API for user authentication and authorization using **Bearer tokens (JWT)**, built with **Express.js** and **MongoDB (Mongoose)**, following the **MVC architecture**.
+A Node.js REST API implementing **user authentication and authorization using JWT Bearer Tokens**, built with **Express.js**, **Mongoose**, and **bcryptjs**, following the MVC pattern.
 
 ---
 
 ## 🚀 **Features**
 
-- User registration with password hashing
+- User registration with hashed password
 - User login with JWT generation
-- Protected route to get user info using JWT middleware
-- Follows clean MVC pattern
-- MongoDB database integration with Mongoose
-- Environment variable configuration using dotenv
+- Protected route to get current user info
+- Password hashing using bcrypt
+- JWT-based authentication middleware
+- MongoDB integration with Mongoose
+- Clean MVC project structure
+- Environment variable configuration with dotenv
 
 ---
 
 ## 📁 **Project Structure**
 
-project/
-├── controllers/
-│ └── authController.js
-├── middlewares/
-│ └── authMiddleware.js
-├── models/
-│ └── User.js
-├── routes/
-│ └── authRoutes.js
+
+jwt-authentication-api/
+│
 ├── config/
 │ └── db.js
+│
+├── controllers/
+│ └── authController.js
+│
+├── middlewares/
+│ └── authMiddleware.js
+│
+├── models/
+│ └── User.js
+│
+├── routes/
+│ └── authRoutes.js
+│
+├── .env
+├── .gitignore
 ├── app.js
 ├── package.json
-└── .env
+└── README.md
 
 
-📬 API Endpoints
-➡️ Register User
+
+
+🔗 API Endpoints
+📌 Register User
 URL: /api/auth/register
 
 Method: POST
 
 Body (JSON):
+
 {
   "username": "nk",
   "email": "nk@example.com",
-  "password": "StrongPassword123"
+  "password": "StrongPassword123",
+  "age": 21,
+  "gender": "Male",
+  "bio": "Backend developer and learner."
 }
 
-Response:  
+
+
+Success Response (201):
+
 
 {
   "success": true,
   "msg": "User registered successfully",
   "user": {
-    "id": "60dd...",
+    "id": "64d8...",
     "username": "nk",
-    "email": "nk@example.com"
+    "email": "nk@example.com",
+    "age": 21,
+    "gender": "Male",
+    "bio": "Backend developer and learner."
   }
 }
 
 
-➡️ Login User
+📌 Login User
 URL: /api/auth/login
 
 Method: POST
 
 Body (JSON):
+
+
 {
   "email": "nk@example.com",
   "password": "StrongPassword123"
 }
 
-Response:
+
+Success Response (200):
 
 {
   "success": true,
@@ -79,21 +105,40 @@ Response:
 }
 
 
-➡️ Get Current User Info
+📌 Get Current User Info (Protected)
 URL: /api/auth/me
 
 Method: GET
 
-Headers: Authorization: Bearer <token>
+Headers:
+
+
+| Key           | Value                 |
+| ------------- | --------------------- |
+| Authorization | Bearer \<token\_here> |
+
+
+Success Response (200):
+
 
 
 {
   "success": true,
   "user": {
-    "id": "60dd...",
+    "id": "64d8...",
     "username": "nk",
-    "email": "nk@example.com"
+    "email": "nk@example.com",
+    "age": 21,
+    "gender": "Male",
+    "bio": "Backend developer and learner."
   }
 }
 
- 
+
+
+🔒 Authentication
+All protected routes require a valid JWT token in the Authorization header:
+
+Authorization: Bearer <token>
+
+
