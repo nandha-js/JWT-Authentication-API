@@ -1,0 +1,31 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# dotenv environment variables
+.env
+
+# Logs
+logs
+*.log
+logs/**/*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Optional: Ignore coverage reports if using testing frameworks
+coverage/
+
+# Optional: Ignore build outputs if you later add them
+dist/
+build/
