@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
  * @access  Public
  */
 exports.register = async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, age, gender, bio } = req.body;
 
   try {
     // Check if user exists
@@ -18,7 +18,14 @@ exports.register = async (req, res) => {
     }
 
     // Create new user instance
-    user = new User({ username, email, password });
+    user = new User({
+      username,
+      email,
+      password,
+      age,
+      gender,
+      bio
+    });
 
     // Hash password before saving
     const salt = await bcrypt.genSalt(10);
@@ -32,7 +39,10 @@ exports.register = async (req, res) => {
       user: {
         id: user._id,
         username: user.username,
-        email: user.email
+        email: user.email,
+        age: user.age,
+        gender: user.gender,
+        bio: user.bio
       }
     });
   } catch (err) {
@@ -67,7 +77,10 @@ exports.login = async (req, res) => {
       user: {
         id: user.id,
         username: user.username,
-        email: user.email
+        email: user.email,
+        age: user.age,
+        gender: user.gender,
+        bio: user.bio
       }
     };
 

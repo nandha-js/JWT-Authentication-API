@@ -27,6 +27,18 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Password is required'],
       minlength: [6, 'Password must be at least 6 characters']
+    },
+    age: {
+      type: Number,
+      min: [0, 'Age cannot be negative']
+    },
+    gender: {
+      type: String,
+      enum: ['Male', 'Female', 'Other']
+    },
+    bio: {
+      type: String,
+      maxlength: [500, 'Bio cannot exceed 500 characters']
     }
   },
   {
